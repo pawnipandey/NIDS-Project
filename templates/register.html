@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NIDS Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav style="background:#0d6efd;padding:15px;">
+    <a href="/" style="color:white;margin-right:20px;">Home</a>
+    <a href="/loginpage" style="color:white;margin-right:20px;">Login</a>
+    <a href="/registerpage" style="color:white;margin-right:20px;">Register</a>
+    <a href="/dashboard" style="color:white;">Dashboard</a>
+</nav>
+
+<h1>NIDS Register</h1>
+
+<form id="registerForm">
+    <form id="registerForm" style="width:300px; margin:auto;">
+
+    <input type="text" id="username" placeholder="Username" style="width:100%; padding:10px;">
+    <br><br>
+
+    <input type="email" id="email" placeholder="Email" style="width:100%; padding:10px;">
+    <br><br>
+
+    <input type="password" id="password" placeholder="Password" style="width:100%; padding:10px;">
+    <br><br>
+
+    <button type="submit" style="width:100%; padding:10px;">
+        Register
+    </button>
+
+</form>
+    
+</form>
+<script>
+document.getElementById("registerForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const response = await fetch("/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username,
+            email,
+            password
+        })
+    });
+
+    const data = await response.json();
+    alert(data.message);
+});
+</script>
+
+</body>
+</html>
